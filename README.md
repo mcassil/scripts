@@ -1,2 +1,2 @@
 # scripts
-Scripts gerais
+Scripts gerais gerais que utilizo, em cada arquivo há um programa diferente.
