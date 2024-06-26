@@ -2,8 +2,8 @@
 # Autor: Maciel Castro
 # E-mail: macielcastro@rocketmail.com
 # Distro: Ubuntu 22.04
-apt update
-apt upgrade
+apt update -y
+apt upgrade -y
 apt install xrdp ssl-cert -y
 # xrdp precisa dos certificados para funcionar
 usermod -a -G ssl-cert xrdp
