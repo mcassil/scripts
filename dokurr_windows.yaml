@@ -1,0 +1,91 @@
+services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    environment:
+      VERSION: "xp"
+# Mudar tamanho padrão do disco, Default 64 GB
+      DISK_SIZE: "4G"
+# Para instalação manual do SO
+#      MANUAL: "Y"
+#      RAM_SIZE: "8G"
+#      CPU_CORES: "4"
+#      USERNAME: "bill"
+#      PASSWORD: "gates"
+      LANGUAGE: "Portuguese"
+#      REGION: "en-US"
+#      KEYBOARD: "en-US"
+# Pass-through dispositivo USB (lsusb), descomente /dev/bus/usb
+#      ARGUMENTS: "-device usb-host,vendorid=0x1234,productid=0x1234"
+    devices:
+#      - /dev/bus/usb
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8006:8006
+      - 3389:3389/tcp
+      - 3389:3389/udp
+    stop_grace_period: 2m
+# Mudar o local de armazenamento
+#    volumes:
+#      - /var/win:/storage
+# Cria um compartilhamento em \host.lan\Data, vá em pastas de rede e acesse.
+#      - /home/user/example:/data
+# Custom image
+#      - /home/user/example.iso:/custom.iso
+# Iniciar algum script após a instalação (Crie install.bat e insira seus comandos)
+#      - /home/user/example:/oem
+# Discos reais no container
+#      - /dev/sdb:/disk1
+#      - /dev/sdc:/disk2
+# Discos virtuais extras 
+#    environment:
+#      DISK2_SIZE: "32G"
+#      DISK3_SIZE: "64G"
+#    volumes:
+#      - /home/example:/storage2
+#      - /mnt/data/example:/storage3
+
+
+# Criar rede docker, mude eth0 por sua interface
+# docker network create -d macvlan --subnet=192.168.0.0/24 --gateway=192.168.0.1 --ip-range=192.168.0.100/28 -o parent=eth0 vlan
+#    networks:
+#      vlan:
+#        ipv4_address: 192.168.0.100
+#networks:
+#  vlan:
+#    external: true
+# Liberando container na rede do docker host.
+# O container vai ser reconhecido como um host real na rede e pegar IP por DHCP.
+# Após a configuração da rede macvlan adicione as linhas abaixo.
+#    environment:
+#      DHCP: "Y"
+#    devices:
+#      - /dev/vhost-net
+#    device_cgroup_rules:
+#      - 'c *:* rwm'
+
+# VERSION: "11"
+# 11      Baixar o programa Windows 11 Pro    5.4 GB
+# 11l     Baixar o Windows 11 LTSC            4.2 GB
+# 11e     Windows 11 Empresa                  5.8 GB        
+# 10      Baixar o programa Windows 10 Pro    5,7 GB
+# 10l     Windows 10 LTSC (Ao)                4,6 GB
+# 10e     Windows 10 Empresa                  5,2 GB    
+# 8e      Windows 8.1 Empreendimento          3.7 GB
+# 7e      Windows 7 Empresa em                3,0 GB
+# ve      Informações sobre o Windows Vista Enterprise    3,0 GB
+# xp      Profissional do Windows XP          0.6 GB
+
+# 2025    Servidor do Windows 2025    5,0 GB
+# 2022    Servidor do Windows 2022    4.7 GB
+# 2019    Servidor do Windows 2019    5,3 GB
+# 2016    Servidor do Windows 2016    6.5 GB
+# 2012    Servidor do Windows 2012    4,3 GB
+# 2008    Windows Server 2008         3,0 GB
+# 2003    Servidor do Windows 2003    0.6 GB
+
+
+
